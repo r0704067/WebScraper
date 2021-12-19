@@ -28,7 +28,7 @@ namespace DevopsWebScraper
                     "=====================================================================================================================" + Environment.NewLine);
                 Thread.Sleep(500);
 
-                Console.WriteLine("Choose a website to scrape" + Environment.NewLine + "A) YouTube" + Environment.NewLine + "B) Jobs" + Environment.NewLine + "C) Mx24");
+                Console.WriteLine("Choose a website to scrape   A) YouTube     B) Jobs      C) Mx24");
                 Thread.Sleep(500);
 
                 string keuzeWebsite = Console.ReadLine().Substring(0,1).ToUpper();
@@ -36,15 +36,24 @@ namespace DevopsWebScraper
 
                 while (string.IsNullOrEmpty(keuzeWebsite))
                 {
-                    Console.WriteLine("Choose a website to scrape" + Environment.NewLine + "1) YouTube" + Environment.NewLine + "2) Jobs" + Environment.NewLine + "3) Mx24");
+                    Console.WriteLine("Choose a website to scrape   A) YouTube     B) Jobs      C) Mx24");
                     Thread.Sleep(500);
 
                     Console.ReadLine();
                     Thread.Sleep(500);
                 }
-                if (keuzeWebsite == "A")
+
+
+
+
+
+
+
+
+
+                if (keuzeWebsite == "A") // dit is voor YOUTUBE
                 {
-                    Console.WriteLine("Enter trefwoord:");
+                    Console.WriteLine(Environment.NewLine + "Enter trefwoord:");
                     Thread.Sleep(1000);
 
                     string trefwoord = Console.ReadLine();
@@ -55,7 +64,7 @@ namespace DevopsWebScraper
                     while (string.IsNullOrEmpty(trefwoord))
                     {
 
-                        Console.WriteLine("Enter trefwoord:");
+                        Console.WriteLine(Environment.NewLine + "Enter trefwoord:");
                         Thread.Sleep(500);
 
                         Console.ReadLine();
@@ -98,7 +107,7 @@ namespace DevopsWebScraper
                         // lijst met videos maken
                         
                         IList<IWebElement> videos = driver.FindElements(By.XPath("//*[@id='contents']/ytd-video-renderer/div[1]"));
-                        Console.WriteLine("Total number of videos are " + videos.Count);
+                        Console.WriteLine("Total number of videos are " + videos.Count + Environment.NewLine);
                         Thread.Sleep(2000);
 
                         for (int index = 0; index < 5; index++)
@@ -107,23 +116,23 @@ namespace DevopsWebScraper
 
                             IWebElement link = (IWebElement)videos[index].FindElement(By.Id("thumbnail"));
                             Thread.Sleep(500);
-                            Console.WriteLine("Link: " + link.GetAttribute("href"));
+                            Console.WriteLine("Link:        " + link.GetAttribute("href"));
 
 
                             IWebElement title = (IWebElement)videos[index].FindElement(By.CssSelector("#video-title"));
                             Thread.Sleep(500);
                             videoTitle = title.Text;
-                            Console.WriteLine("title: " + videoTitle);
+                            Console.WriteLine("title:       " + videoTitle);
 
                             IWebElement uploader = (IWebElement)videos[index].FindElement(By.CssSelector("div[id='dismissible'] div div[id='channel-info'] ytd-channel-name a"));
                             Thread.Sleep(500);
                             videoUploader = uploader.Text;
-                            Console.WriteLine("Uploader: " + videoUploader);
+                            Console.WriteLine("Uploader:        " + videoUploader);
 
                             IWebElement views = (IWebElement)videos[index].FindElement(By.XPath(".//*[@id='metadata-line']/span[1]"));
                             Thread.Sleep(500);
                             videoViews = views.Text;
-                            Console.WriteLine("views: " + videoViews);
+                            Console.WriteLine("views:       " + videoViews + Environment.NewLine);
 
                             YouTubeVideo vid = new YouTubeVideo(videoTitle, videoUploader, videoViews, link.GetAttribute("href"));
 
@@ -132,13 +141,21 @@ namespace DevopsWebScraper
 
 
                         }
+
+                        driver.Close();
                     }
                 }
-                else if (keuzeWebsite == "B")
+
+
+
+
+
+
+                else if (keuzeWebsite == "B") // dit is voor jobs
                 {
 
 
-                    Console.WriteLine("Enter trefwoord:");
+                    Console.WriteLine(Environment.NewLine + "Enter trefwoord:");
                     Thread.Sleep(1000);
 
                     string trefwoord = Console.ReadLine();
@@ -149,7 +166,7 @@ namespace DevopsWebScraper
                     while (string.IsNullOrEmpty(trefwoord))
                     {
 
-                        Console.WriteLine("Enter trefwoord:");
+                        Console.WriteLine(Environment.NewLine + "Enter trefwoord:");
                         Thread.Sleep(500);
 
                         Console.ReadLine();
@@ -219,12 +236,12 @@ namespace DevopsWebScraper
                         }
                         
                         IList<IWebElement> Jobs = driver.FindElements(By.XPath("//a[contains(@class, 'result')]"));
-                        Console.WriteLine("Total number of jobs are " + Jobs.Count);
+                        Console.WriteLine("Total number of jobs are " + Jobs.Count + Environment.NewLine);
                         foreach (IWebElement job in Jobs)
                         {
 
                             IWebElement Title = job.FindElement(By.CssSelector("h2 > span"));
-                            Console.WriteLine("Title: " + Title.GetAttribute("title"));
+                            Console.WriteLine("Title:   " + Title.GetAttribute("title"));
                             Thread.Sleep(2000);
 
                             IWebElement Bedrijf = job.FindElement(By.XPath("//div[1]/div/div[1]/div/table[1]/tbody/tr/td/div[2]/pre/span[1]"));
@@ -236,15 +253,25 @@ namespace DevopsWebScraper
                             Thread.Sleep(2000);
 
                             string Link = job.GetAttribute("href");
-                            Console.WriteLine("Link: " + Link);
+                            Console.WriteLine("Link:    " + Link + Environment.NewLine);
                         }
+
+                        driver.Close();
                     }
+
+
 
                 }
 
-                else if (keuzeWebsite == "C")
+
+
+
+
+
+
+                else if (keuzeWebsite == "C") // dit is voor mx24
                 {
-                    Console.WriteLine("Enter trefwoord:");
+                    Console.WriteLine(Environment.NewLine + "Enter trefwoord:");
                     Thread.Sleep(1000);
 
                     string trefwoord = Console.ReadLine();
@@ -255,7 +282,7 @@ namespace DevopsWebScraper
                     while (string.IsNullOrEmpty(trefwoord))
                     {
 
-                        Console.WriteLine("Enter trefwoord:");
+                        Console.WriteLine( Environment.NewLine + "Enter trefwoord:");
                         Thread.Sleep(500);
 
                         Console.ReadLine();
@@ -300,7 +327,7 @@ namespace DevopsWebScraper
                         Thread.Sleep(5000);
 
                         IList<IWebElement> Products = driver.FindElements(By.XPath("//p-search-products/div/div[2]/div[contains(@class, 'col--product-card')]"));
-                        Console.WriteLine("Total number of products are " + Products.Count);
+                        Console.WriteLine("Total number of products are " + Products.Count + Environment.NewLine);
                         foreach (IWebElement product in Products)
                         {
 
@@ -309,14 +336,17 @@ namespace DevopsWebScraper
                             Thread.Sleep(2000);
 
                             IWebElement Prijs = product.FindElement(By.CssSelector("div[class='m-product-card-info__container'] > div:nth-child(1)"));
-                            Console.WriteLine("Prijs: " + Prijs.GetAttribute("innerText"));
+                            Console.WriteLine("Prijs:   " + Prijs.GetAttribute("innerText"));
                             Thread.Sleep(2000);
 
 
 
                             IWebElement Link = product.FindElement(By.TagName("a"));
-                            Console.WriteLine("Link: " + Link.GetAttribute("href"));
+                            Console.WriteLine("Link:    " + Link.GetAttribute("href") + Environment.NewLine);
+                            Thread.Sleep(2000);
                         }
+
+                        driver.Close();
                     }
                 }
 
