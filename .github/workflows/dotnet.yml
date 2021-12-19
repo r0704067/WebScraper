@@ -20,5 +20,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: publish
-      run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=True
+      run: dotnet publish -r win-x64 --configuration ReleaseComplete
+    - name: Upload artifact - Windows
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: WebScraper.exe
+        path: WebScraper/bin/ReleaseComplete/netcoreapp3.1/win-x64/publish/WebScraper.exe
   
