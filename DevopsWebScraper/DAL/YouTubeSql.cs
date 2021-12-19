@@ -12,12 +12,14 @@ namespace DevopsWebScraper.DAL
     {
         public YouTubeSql()
         {
+            // kijken of db bestaat
             if (!DatabaseExists())
             {
                 CreateDatabase();
             }
         }
 
+        // dit is de insert voor dapper
         public static void InsertYouTubeVideo(YouTubeVideo video)
         {
             string sqlString = "INSERT INTO YouTubeVideo (Title, Uploader, Views, Link) VALUES (@Title, @Uploader, @Views, @Link);";
@@ -28,19 +30,20 @@ namespace DevopsWebScraper.DAL
                 connection.Execute(sqlString, video);
             }
         }
+        // get videos
         public IEnumerable<YouTubeVideo> GetYouTubeVideos()
         {
-            String youtubeSql = "DELETE FROM YouTubeVideo;";
+            string youtubeSql = "SELECT * FROM YouTubeVideo;";
 
             using (SqliteConnection connection = DbConnectionFactory())
             {
                 return connection.Query<YouTubeVideo>(youtubeSql);
             }
         }
-
+        // delete video
         public static void DeleteYouTubeVideo()
         {
-            String youtubeSql = "DELETE FROM YouTubeVideo;";
+            string youtubeSql = "DELETE FROM YouTubeVideo;";
             using (SqliteConnection connection = DbConnectionFactory())
             {
                 connection.Query<YouTubeVideo>(youtubeSql);
