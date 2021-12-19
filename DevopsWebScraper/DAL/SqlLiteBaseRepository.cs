@@ -12,16 +12,17 @@ namespace DevopsWebScraper.DAL
         public SqliteBaseRepository()
         {
         }
-
+        //maakt connectie met db
         public static SqliteConnection DbConnectionFactory()
         {
             return new SqliteConnection(@"DataSource=WebscraperDB.sqlite");
         }
+        // kijkt of db bestaat
         protected static bool DatabaseExists()
         {
             return File.Exists(@"WebscraperDB.sqlite");
         }
-
+        // database aanmaken
         protected static void CreateDatabase()
         {
             using (var connection = DbConnectionFactory())

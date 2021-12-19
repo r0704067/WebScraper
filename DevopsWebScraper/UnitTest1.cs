@@ -14,41 +14,33 @@ namespace DevopsWebScraper
     {
         internal static SortedSet<YouTubeVideo> youTubeVideos;
 
+        
+
 
         static void Main(string[] args)
         {
             YouTubeSql youtubeSql = new YouTubeSql();
             youTubeVideos = new SortedSet<YouTubeVideo>(youtubeSql.GetYouTubeVideos());
+
+            Console.WriteLine("=====================================================================================================================" + Environment.NewLine +
+                    "======================================= Webscraper made by Pieter-Jan Vliegen =======================================" + Environment.NewLine +
+                    "=====================================================================================================================" + Environment.NewLine);
+            Thread.Sleep(500);
+
             do
             {
 
 
-                Console.WriteLine("=====================================================================================================================" + Environment.NewLine +
-                    "======================================= Webscraper made by Pieter-Jan Vliegen =======================================" + Environment.NewLine +
-                    "=====================================================================================================================" + Environment.NewLine);
-                Thread.Sleep(500);
+                
 
                 Console.WriteLine("Choose a website to scrape   A) YouTube     B) Jobs      C) Mx24");
                 Thread.Sleep(500);
 
-                string keuzeWebsite = Console.ReadLine().Substring(0,1).ToUpper();
+                
+                string keuzeWebsite = Console.ReadLine().Substring(0, 1).ToUpper();
                 Thread.Sleep(500);
-
-                while (string.IsNullOrEmpty(keuzeWebsite))
-                {
-                    Console.WriteLine("Choose a website to scrape   A) YouTube     B) Jobs      C) Mx24");
-                    Thread.Sleep(500);
-
-                    Console.ReadLine();
-                    Thread.Sleep(500);
-                }
-
-
-
-
-
-
-
+                
+                
 
 
                 if (keuzeWebsite == "A") // dit is voor YOUTUBE
@@ -348,6 +340,7 @@ namespace DevopsWebScraper
 
                         driver.Close();
                     }
+                    
                 }
 
 
