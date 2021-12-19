@@ -20,10 +20,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: publish
-      run: dotnet publish -r win-x64
+      run: dotnet publish -r win-x64 -c Release --self-contained
     - name: Upload artifact - Windows
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: WebScraper.exe
+        name: WebScraper
         path: DevopsWebScraper/bin/Debug/netcoreapp3.1/
   
